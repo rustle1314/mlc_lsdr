@@ -6,6 +6,7 @@ HLFaIE  = zeros(1,14);
 HLCSSP  = zeros(1,14);
 
 for M=1:14
+  disp(['M=', num2str(M)])
   [~, HLbr(M)]    = LSpaceTrans('yeast', M, 'br');
   [~, HLplst(M)]  = LSpaceTrans('yeast', M, 'plst');
   [~, HLcplst(M)] = LSpaceTrans('yeast', M, 'cplst');
