@@ -1,4 +1,8 @@
-function [Z, recover] = cssp_encode(Y, M)
+function [Z, recover] = cssp_encode(Y, M, lambda)
+    if (~exist('lambda','var'))
+        lambda = 10^-6;
+    end
+
     [u,d,v] = svd(Y);
     vt = v';
     vtk = vt(1:M,:);
@@ -15,7 +19,9 @@ function [Z, recover] = cssp_encode(Y, M)
     end    
 
     Z = C;
-    recover = pinv(C) * Y;
+    recover = ridgereg_pinv(C, lambda) * Y;
+    %recover = pinv(C) * Y;
+    
 end
 
 function idx = pick(p, used, sum_p)
