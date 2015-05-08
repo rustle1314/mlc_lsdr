@@ -15,6 +15,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     Yt = 2*Yt - 1;
   end
 
+
   %encoding scheme
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))

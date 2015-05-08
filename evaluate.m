@@ -3,9 +3,6 @@ function [accuracy,ins_f,label_f,ham,zero_one] = evaluate(p,y)
     m = size(y,1);
     tp = (p == y & p > e);
 
-    %disp('p_y')
-    %disp(p(1:3,1:3))
-    %disp(y(1:3,1:3))
     
     %%caculate accuracy
     sum_tp = sum(tp,2);
