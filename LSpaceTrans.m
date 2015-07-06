@@ -9,6 +9,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   [N, K] = size(Y);
   [Nt, d] = size(Xt);
 
+  tic
   % {0,1} -> {-1,1}
   if sum(sum(Y>0)) == sum(sum(Y))
     Y = 2*Y - 1;
@@ -35,12 +36,15 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
-  end
-  
+  end  
+
   %ridge regression
   ww = ridgereg(Z, X, lambda);
   Zt_pred = [ones(Nt, 1) Xt] * ww;
+  t=toc;
+  disp(['training time ' num2str(t)])
 
+  tic
   %decoding scheme
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))
@@ -59,6 +63,8 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
   end
+  t = toc;
+  disp(['test time ' num2str(t)])
   [~,~,~,HL,~] = evaluate(Yt_pred, Yt);
   %HL = 0;
   %HL = sum(sum(Yt_pred ~= Yt)) / Nt / K;
