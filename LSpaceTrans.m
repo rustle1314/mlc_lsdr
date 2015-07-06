@@ -11,10 +11,10 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
 
   tic
   % {0,1} -> {-1,1}
-  if sum(sum(Y>0)) == sum(sum(Y))
-    Y = 2*Y - 1;
-    Yt = 2*Yt - 1;
-  end
+  %if sum(sum(Y>0)) == sum(sum(Y))
+  %  Y = 2*Y - 1;
+  %  Yt = 2*Yt - 1;
+  %end
 
 
   %encoding scheme
